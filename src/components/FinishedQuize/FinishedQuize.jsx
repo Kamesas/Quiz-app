@@ -7,7 +7,13 @@ import {
   faCheckCircle
 } from "@fortawesome/free-regular-svg-icons";
 
-const FinishedQuize = ({ results, quize }) => {
+const FinishedQuize = ({
+  results,
+  quize,
+  retryHandler,
+  showDatailsToggle,
+  showDatails
+}) => {
   const successCount = Object.keys(results).reduce((total, key) => {
     if (results[key] === "success") {
       total++;
@@ -18,6 +24,13 @@ const FinishedQuize = ({ results, quize }) => {
 
   return (
     <div className={stl["finished"]}>
+      <p>
+        Правильно {successCount} из {quize.length}
+      </p>
+      <div>
+        <button onClick={retryHandler}>Повторить</button>
+        <button onClick={showDatailsToggle}>Показать подробности</button>
+      </div>
       <ul>
         {quize.map((quizeItem, i) => {
           return (
@@ -28,26 +41,18 @@ const FinishedQuize = ({ results, quize }) => {
               ) : (
                 <FontAwesomeIcon icon={faCheckCircle} color="green" />
               )}
-              {
+              {showDatails ? (
                 <ul>
                   <FinishedAnswersList
                     results={results}
                     quizeItem={quizeItem}
                   />
                 </ul>
-              }
+              ) : null}
             </li>
           );
         })}
       </ul>
-
-      <p>
-        Правильно {successCount} из {quize.length}
-      </p>
-
-      <div>
-        <button>Повторить</button>
-      </div>
     </div>
   );
 };

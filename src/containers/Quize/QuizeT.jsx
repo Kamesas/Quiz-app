@@ -46,7 +46,6 @@ class Quize extends Component {
     onClickAnswer: 0,
     isFinished: false,
     results: {},
-    showDatails: false,
     quize: q
   };
 
@@ -59,12 +58,12 @@ class Quize extends Component {
     }
 
     if (question.rightAnswerId === id) {
-      results[question.id] = "success";
+      results[question.id] = { isRight: "success" };
       this.setState({ answerState: { [id]: "success" }, results });
       this.timeOut();
     } else {
       this.timeOut();
-      results[question.id] = "error";
+      results[question.id] = { isRight: "error" };
       this.setState({ answerState: { [id]: "error" }, results });
     }
   };
@@ -82,21 +81,7 @@ class Quize extends Component {
         this.setState({ isFinished: true });
       }
       window.clearTimeout(timeOut);
-    }, 1000);
-  };
-
-  retryHandler = () => {
-    this.setState({
-      currentQuestion: 0,
-      answerState: null,
-      onClickAnswer: 0,
-      isFinished: false,
-      results: {}
-    });
-  };
-
-  showDatailsToggle = () => {
-    this.setState({ showDatails: !this.state.showDatails });
+    }, 1500);
   };
 
   render() {
@@ -105,21 +90,15 @@ class Quize extends Component {
       currentQuestion,
       answerState,
       isFinished,
-      results,
-      showDatails
+      results
     } = this.state;
     return (
       <div className={stl["quize"]}>
+        <FinishedQuize results={results} quize={quize} />
         <div className={stl["quize-content"]}>
           <h1>{isFinished ? "Результат" : "Тестирование"}</h1>
           {isFinished ? (
-            <FinishedQuize
-              results={results}
-              quize={quize}
-              retryHandler={this.retryHandler}
-              showDatailsToggle={this.showDatailsToggle}
-              showDatails={showDatails}
-            />
+            <FinishedQuize results={results} quize={quize} />
           ) : (
             <div className={stl["quize-question"]}>
               <ActiveQuize

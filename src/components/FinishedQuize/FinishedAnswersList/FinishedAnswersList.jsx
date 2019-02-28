@@ -8,7 +8,7 @@ const FinishedAnswersList = ({ quizeItem, results }) => {
         return (
           <li key={answer.id} className={stl["finished-answers-list"]}>
             {quizeItem.rightAnswerId === answer.id ? (
-              <strong>{answer.answer}</strong>
+              <span className={stl["right-answer"]}>{answer.answer}</span>
             ) : (
               <span>{answer.answer}</span>
             )}
