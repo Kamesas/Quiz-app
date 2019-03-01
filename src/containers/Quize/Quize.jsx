@@ -99,6 +99,10 @@ class Quize extends Component {
     this.setState({ showDatails: !this.state.showDatails });
   };
 
+  componentDidMount() {
+    console.log("q id", this.props.match.params.id);
+  }
+
   render() {
     const {
       quize,

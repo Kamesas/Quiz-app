@@ -2,6 +2,7 @@ import React from "react";
 import stl from "./FinishedQuize.module.sass";
 import FinishedAnswersList from "./FinishedAnswersList/FinishedAnswersList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import {
   faTimesCircle,
   faCheckCircle
@@ -29,6 +30,9 @@ const FinishedQuize = ({
       </p>
       <div>
         <button onClick={retryHandler}>Повторить</button>
+        <Link to="/">
+          <button>К списку тестов</button>
+        </Link>
         <button onClick={showDatailsToggle}>Показать подробности</button>
       </div>
       <ul>

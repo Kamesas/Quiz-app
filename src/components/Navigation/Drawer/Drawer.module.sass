@@ -31,15 +31,35 @@
       text-align: center
       margin: 3px
       padding: 8px
-      list-style-type: none
-      color: #fff
+      list-style-type: none     
       transition: all .3s ease
-      text-transform: uppercase
+      text-transform: uppercase      
       &:hover
         cursor: pointer
-        background-color: #fff
-        color: #000
+        background-color: #fff       
         transition: all .3s ease
+        a
+          color: #000                
+    a
+      color: #fff
+      text-decoration: none
+      letter-spacing: 2px
+      width: 100%
+      display: block
+      transition: all .3s ease
+     
+  .active    
+    position: relative
+    &:after
+      content: '>'
+      position: absolute
+      right: 0
+      top: -1px
+    &:before
+      content: '<'
+      position: absolute
+      left: 0
+      top: -1px
 
 .closeDrower
   opacity: 0
